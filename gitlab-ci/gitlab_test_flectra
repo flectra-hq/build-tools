@@ -214,8 +214,6 @@ def main(argv=None):
     parser = argparse.ArgumentParser(description='Create Docker Instances....')
     parser.add_argument('--build', dest='build',help='Port For Instance',required=True,default="base")
     args = parser.parse_args()
-    print ("ARGS --------",args)
-
     build = args.build
     
     if argv is None:
