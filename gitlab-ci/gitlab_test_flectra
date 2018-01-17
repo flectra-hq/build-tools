@@ -234,7 +234,7 @@ def main(argv=None):
         
 #     errors = ( errors_in_base or 0) + ( errors_in_all or 0)
 #     #print ("ERRORS IN BASE : ",errors_in_base)
-    print ("ERRORS IN ALL : ",errors)
+    print ("************ ERRORS ************  : ",errors)
     return errors
 
 if __name__ == '__main__':
