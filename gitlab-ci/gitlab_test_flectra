@@ -51,7 +51,7 @@ modules_to_ignore = ["account","account_analytic_default","account_asset","accou
                      "website_payment","website_quote","website_rating","website_rating_project","website_sale_comparison",
                      "website_sale_delivery","website_sale_digital","website_sale_management","website_sale_options",
                      "website_sale_stock","website_sale_stock_options","website_sale_wishlist","website_theme_install",
-                     "website_twitter","theme_art","theme_hermit","theme_leith","theme_techreceptives"]
+                     "website_twitter"]
 
 def colorized(text, color):
     return '\n'.join(
