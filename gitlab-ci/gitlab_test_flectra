@@ -241,8 +241,8 @@ def main(argv=None):
     if argv is None:
         argv = sys.argv
     res = {}
-    server_path = "/home/flectra/workspace/flectra"
-    # server_path = os.getcwd()
+    #server_path = "/home/flectra/workspace/flectra"
+    server_path = os.getcwd()
 
     if build == "all":
         res['all'] = run_flectra(type_of_db="all", server_path=server_path)
