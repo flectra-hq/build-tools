@@ -183,8 +183,9 @@ def run_flectra(type_of_db, server_path):
         # creates trouble and build always fails
         addons_path = os.path.join(server_path, "addons")
         addons = list(
-            set([addon.name for addon in os.scandir(addons_path) if addon.is_dir() and "10n" not in addon.name]))
-        
+            set([addon.name for addon in os.scandir(addons_path) if addon.is_dir() and "10n" not in addon.name]) - set(
+                modules_to_ignore))
+
         if type_of_db == "all":
             modules_to_init = str(",".join(addons))
         else:
