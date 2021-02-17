@@ -50,7 +50,7 @@ modules_to_ignore = ["account_analytic_default", "account_bank_statement_import"
                      "web_settings_dashboard", "web_tour", "website_crm", "website_crm_partner_assign",
                      "website_crm_phone_validation", "website_customer", "website_event_questions",
                      "website_event_sale", "website_event_track", "website_form", "website_form_project",
-                     "website_forum_doc", "website_gengo" , "website_google_map", "website_hr", "website_hr_recruitment",
+                     "website_forum_doc", "website_gengo", "website_google_map", "website_hr", "website_hr_recruitment",
                      "website_links", "website_livechat", "website_mail", "website_mail_channel", "website_mass_mailing",
                      "website_membership", "website_partner", "website_payment", "website_quote", "website_rating",
                      "website_rating_project", "website_sale_comparison", "website_sale_delivery", "website_sale_digital",
@@ -186,12 +186,13 @@ def run_flectra(type_of_db, server_path):
             set([addon.name for addon in os.scandir(addons_path) if addon.is_dir() and "10n" not in addon.name]) - set(
                 modules_to_ignore))
 
-        if type_of_db == "all":
-            modules_to_init = str(",".join(addons))
-        else:
-            modules_to_init = "base"
 
-        cmd_flectra = ["unbuffer", "coverage", "run"]
+        if type_of_db == "all":
+            modules_to_init=str(",".join(addons))
+        else:
+            modules_to_init="base"
+
+        cmd_flectra=["unbuffer", "coverage", "run"]
         cmd_flectra += ["%s/flectra-bin" % (server_path),
                         "-d",
                         db,
@@ -202,7 +203,8 @@ def run_flectra(type_of_db, server_path):
                         "--log-level=info",
                         "--stop-after-init",
                         "--test-enable",
-                        "--init", modules_to_init]
+                        "--init", modules_to_init
+                        ]
         print("CMD EXECUTED --->>> ", " ".join(cmd_flectra))
 
         with subprocess.Popen(cmd_flectra, stdout=subprocess.PIPE, bufsize=1, universal_newlines=True) as p:
@@ -218,23 +220,24 @@ def run_flectra(type_of_db, server_path):
 
 def main(argv=None):
     parser = argparse.ArgumentParser(description='Create Docker Instances....')
-    parser.add_argument('--build', dest='build', help='Port For Instance', required=True, default="base")
-    args = parser.parse_args()
-    build = args.build
+    parser.add_argument('--build', dest='build',
+                        help = 'Port For Instance', required = True, default = "base")
+    args=parser.parse_args()
+    build=args.build
 
     if argv is None:
-        argv = sys.argv
-    res = {}
-    #server_path = "/home/flectra/workspace/flectra"
-    server_path = os.getcwd()
+        argv=sys.argv
+    res={}
+    # server_path = "/home/flectra/workspace/flectra"
+    server_path=os.getcwd()
 
     if build == "all":
-        res['all'] = run_flectra(type_of_db="all", server_path=server_path)
-        errors = 'all' in res and res['all'] and 'errors' in res['all'] and res['all']['errors']
+        res['all']=run_flectra(type_of_db = "all", server_path = server_path)
+        errors='all' in res and res['all'] and 'errors' in res['all'] and res['all']['errors']
 
     if build == "base":
-        res['base'] = run_flectra(type_of_db="base", server_path=server_path)
-        errors = 'base' in res and res['base'] and 'errors' in res['base'] and res['base']['errors']
+        res['base']=run_flectra(type_of_db = "base", server_path = server_path)
+        errors='base' in res and res['base'] and 'errors' in res['base'] and res['base']['errors']
 
     #     errors = ( errors_in_base or 0) + ( errors_in_all or 0)
     #     #print ("ERRORS IN BASE : ",errors_in_base)
