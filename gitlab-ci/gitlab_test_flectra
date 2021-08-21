@@ -202,7 +202,7 @@ def run_flectra(type_of_db, server_path):
                         addons_path,
                         "--log-level=info",
                         "--stop-after-init",
-                        "--test-enable",
+                        #"--test-enable",
                         "--init", modules_to_init
                         ]
         print("CMD EXECUTED --->>> ", " ".join(cmd_flectra))
