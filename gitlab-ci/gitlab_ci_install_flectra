@@ -4,7 +4,7 @@ locale-gen --purge en_US.UTF-8 && dpkg-reconfigure --frontend=noninteractive loc
 export DEBIAN_FRONTEND=noninteractive
 apt-get update
 apt-get upgrade -y
-apt-get update && apt-get upgrade -y && apt-get install wget gnupg2 python3 curl expect-dev node-less python3-pillow python3-lxml python3-dev python3-pip python3-setuptools npm nodejs libldap2-dev libsasl2-dev libxml2-dev libxslt1-dev libjpeg-dev zlib1g-dev libfontconfig1 -y
+apt-get update && apt-get upgrade -y && apt-get install xz-utils wget gnupg2 python3 curl expect-dev node-less python3-pillow python3-lxml python3-dev python3-pip python3-setuptools npm nodejs libldap2-dev libsasl2-dev libxml2-dev libxslt1-dev libjpeg-dev zlib1g-dev libfontconfig1 -y
 #adding postgresql debian repo in order to access all available postgresql version
 wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
 echo "deb http://apt.postgresql.org/pub/repos/apt/ focal-pgdg main" > /etc/apt/sources.list.d/pgdg.list
@@ -14,7 +14,7 @@ curl -o wkhtmltox.deb -SL https://github.com/wkhtmltopdf/wkhtmltopdf/releases/do
 dpkg --force-depends -i wkhtmltox.deb
 rm -rf wkhtmltox.deb
 pip3 install -r ${CI_PROJECT_DIR}/requirements.txt coverage
-wget -N http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz && gunzip GeoLiteCity.dat.gz && mkdir -p /usr/share/GeoIP/ && mv GeoLiteCity.dat /usr/share/GeoIP/
+wget -N https://mirrors-cdn.liferay.com/geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.xz && tar -xvf GeoLiteCity.dat.xz && mkdir -p /usr/share/GeoIP/ && mv GeoLiteCity.dat /usr/share/GeoIP/
 service postgresql restart && su - postgres -c "createuser -s flectra"
 adduser --system --quiet --shell=/bin/bash --gecos 'flectra' --group flectra --home=${CI_PROJECT_DIR}
 su flectra
